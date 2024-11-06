@@ -1,0 +1,33 @@
+name: Stage build workflow (WIP)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/stage' || github.ref == 'refs/jdk8'
+    strategy:
+      matrix:
+        java-version: [8, 21]
+        include:
+          - java-version: 8
+            branch: "test_stage_jdk8"
+          - java-version: 21
+            branch: "test_stage"
+    steps:
+      - name: Checkout client
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ matrix.branch }}
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: "semeru" # See 'Supported distributions' for available options
+          java-version: ${{ matrix.java-version }}
+
+      - name: Build and test
+        run: |
+          mvn install
+          cd test
+          mvn test -DskipTests=false

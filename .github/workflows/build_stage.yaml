@@ -1,6 +1,10 @@
 name: Stage build workflow (WIP)
 
 on:
+  pull_request_target:
+    branches:
+      - stage
+      - jdk8
   workflow_dispatch:
 
 jobs:

@@ -1,11 +1,12 @@
-name: Stage build workflow (WIP)
+name: Pull `request open` stage build workflow (WIP)
 
 on:
-  pull_request_target:
+  pull_request:
     branches:
       - stage
       - jdk8
-  workflow_dispatch:
+    types:
+      - review_requested
 
 jobs:
   build-stage:
@@ -29,8 +30,11 @@ jobs:
           distribution: "semeru" # See 'Supported distributions' for available options
           java-version: ${{ matrix.java-version }}
 
-      - name: Set up Aerospike Database
-        uses: reugn/github-action-aerospike@v1
+      - name: Run EE server
+        uses: ./.github/actions/run-ee-server
+        #with:
+        #  use-server-rc: ${{ inputs.use-server-rc }}
+        #  server-tag: ${{ inputs.server-tag }}
 
       - name: Build and test
         run: |
@@ -59,8 +63,11 @@ jobs:
           distribution: "semeru" # See 'Supported distributions' for available options
           java-version: ${{ matrix.java-version }}
 
-      - name: Set up Aerospike Database
-        uses: reugn/github-action-aerospike@v1
+      - name: Run EE server
+        uses: ./.github/actions/run-ee-server
+        #with:
+        #  use-server-rc: ${{ inputs.use-server-rc }}
+        #  server-tag: ${{ inputs.server-tag }}
 
       - name: Build and test
         run: |

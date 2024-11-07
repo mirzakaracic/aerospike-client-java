@@ -1,0 +1,65 @@
+name: Stage build workflow (WIP)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-stage:
+    if: github.ref == 'refs/heads/stage'
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        java-version: [21]
+        include:
+          - java-version: 21
+            branch: "stage"
+    steps:
+      - name: Checkout client
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ matrix.branch }}
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: "semeru" # See 'Supported distributions' for available options
+          java-version: ${{ matrix.java-version }}
+
+      - name: Set up Aerospike Database
+        uses: reugn/github-action-aerospike@v1
+
+      - name: Build and test
+        run: |
+          mvn install
+          cd test
+          mvn test -DskipTests=false
+
+  build-jdk8:
+    if: github.ref == 'refs/heads/jdk8'
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        java-version: [8]
+        include:
+          - java-version: 8
+            branch: "jdk8"
+    steps:
+      - name: Checkout client
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ matrix.branch }}
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: "semeru" # See 'Supported distributions' for available options
+          java-version: ${{ matrix.java-version }}
+
+      - name: Set up Aerospike Database
+        uses: reugn/github-action-aerospike@v1
+
+      - name: Build and test
+        run: |
+          mvn install
+          cd test
+          mvn test -DskipTests=false

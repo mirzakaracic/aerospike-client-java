@@ -3,8 +3,7 @@ name: Pull `request open` stage build workflow (WIP)
 on:
   pull_request:
     branches:
-      - stage
-      - stage-jdk8
+      - "stage*"
     types:
       - review_requested
 

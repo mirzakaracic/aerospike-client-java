@@ -68,6 +68,6 @@ jobs:
           - java-version: 8
             branch: "stage-jdk8"
     with:
-      java-version: ${{ matrix.java-verision }}
+      java-version: ${{ matrix.java-version }}
       branch: ${{ matrix.branch }}
       build-identifier: "${{ matrix.java-version }}-${{ matrix.branch }}"

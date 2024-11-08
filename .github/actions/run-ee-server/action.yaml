@@ -35,7 +35,7 @@ runs:
       shell: bash
 
     - name: Create config.conf
-      run: cp ${{ github.workspace }}/workflows/files/config.conf.template config.conf
+      run: cp ${{ github.workspace }}/.github/workflows/files/config.conf.template config.conf
       working-directory: configs
       shell: bash
 

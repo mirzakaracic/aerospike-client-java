@@ -35,6 +35,6 @@ jobs:
       branch: ${{ matrix.branch }}
       bump-version: true
   delete-artifacts:
-    needs: build-e
+    needs: build-stage
     name: Delete artifacts
     uses: ./.github/workflows/delete-artifacts.yaml

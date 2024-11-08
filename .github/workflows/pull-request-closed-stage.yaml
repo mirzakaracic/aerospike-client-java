@@ -1,4 +1,4 @@
-name: Pull `request closed` stage build workflow (WIP)
+name: Push to staging (WIP)
 
 on:
   push:
@@ -11,7 +11,7 @@ jobs:
     name: Build stage
     uses: ./.github/workflows/build-stage.yaml
     with:
-      branch: github.ref
+      branch: ${{ github.ref }}
 
   upload-to-jfrog:
     name: Upload artifacts to JFrog

@@ -11,7 +11,7 @@ on:
 jobs:
   build-stage:
     if: github.ref == 'refs/heads/stage'
-    uses: .github/workflow/build.yaml
+    uses: .github/workflows/build.yaml
     strategy:
       matrix:
         java-version: [21]

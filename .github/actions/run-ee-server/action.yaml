@@ -26,13 +26,17 @@ runs:
   steps:
     - name: Install crudini to manipulate config.conf
       # This will only work on the Github hosted runners.
-      run: pipx install crudini --pip-args "-c ${{ github.workspace }}/.github/workflows/scripts/requirements.txt"
+      run: pipx install crudini --pip-args "-c ${{ github.workspace }}/.github/workflows/files/requirements.txt"
       working-directory: .github/workflows
       shell: bash
 
+    - name: Create config folder to store configs in
+      run: mkdir configs
+      shell: bash
+
     - name: Create config.conf
-      run: cp config.conf.template config.conf
-      working-directory: test
+      run: cp ${{ github.workspace }}/workflows/files/config.conf.template config.conf
+      working-directory: configs
       shell: bash
 
     - name: Use enterprise edition instead of community edition in config.conf
@@ -41,11 +45,7 @@ runs:
         crudini --existing=param --set config.conf enterprise-edition hosts 127.0.0.1:3000
         crudini --existing=param --set config.conf enterprise-edition user superuser
         crudini --existing=param --set config.conf enterprise-edition password superuser
-      working-directory: test
-      shell: bash
-
-    - name: Create config folder to store configs in
-      run: mkdir configs
+      working-directory: configs
       shell: bash
 
     - name: Log into Docker Hub to get server RC

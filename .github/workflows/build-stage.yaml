@@ -19,7 +19,7 @@ jobs:
     with:
       java-version: ${{ matrix.java-verision }}
       branch: ${{ matrix.branch }}
-      bump-version: true
+      bump-version: false
 
   build-java-8:
     if: ${{ inputs.branch == 'refs/heads/stage-jdk8' }}
@@ -33,4 +33,4 @@ jobs:
     with:
       java-version: ${{ matrix.java-version }}
       branch: ${{ matrix.branch }}
-      bump-version: true
+      bump-version: false

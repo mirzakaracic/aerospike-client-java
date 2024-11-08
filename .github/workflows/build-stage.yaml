@@ -22,7 +22,7 @@ jobs:
       bump-version: true
 
   build-stage-jdk8:
-    if: ${{ input.branch == 'refs/heads/stage-jdk8' }}
+    if: ${{ inputs.branch == 'refs/heads/stage-jdk8' }}
     uses: ./.github/workflows/build.yaml
     strategy:
       matrix:

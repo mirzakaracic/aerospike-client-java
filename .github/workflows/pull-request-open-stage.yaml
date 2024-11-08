@@ -13,7 +13,7 @@ jobs:
     name: Build stage
     uses: ./.github/workflows/build-stage.yaml
     with:
-      branch: github.ref
+      branch: ${{ github.ref }}
 
   # Clean up after files artifacts have been uploaded to jfrog
   delete-artifacts:

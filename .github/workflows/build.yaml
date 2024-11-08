@@ -9,16 +9,12 @@ on:
       java-version:
         type: number
         required: true
-      build-identifier:
-        type: string
-        required: false
-        default: ""
 
 jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      BUILD_IDENTIFIER: "${{ inputs.branch }}-{{ inputs.java-version }}-${{ inputs.build-identifier}}"
+      BUILD_IDENTIFIER: "${{ inputs.branch }}-{{ inputs.java-version }}"
     steps:
       - name: Checkout client
         uses: actions/checkout@v2

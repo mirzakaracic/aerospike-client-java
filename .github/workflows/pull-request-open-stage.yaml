@@ -26,37 +26,6 @@ jobs:
     with:
       java-version: ${{ matrix.java-verision }}
       branch: ${{ matrix.branch }}
-      build-identifier: "${{ matrix.java-version }}-${{ matrix.branch }}"
-    #runs-on: ubuntu-latest
-    #strategy:
-    #  matrix:
-    #    java-version: [21]
-    #    include:
-    #      - java-version: 21
-    #        branch: "stage"
-    #steps:
-    #  - name: Checkout client
-    #    uses: actions/checkout@v2
-    #    with:
-    #      ref: ${{ matrix.branch }}
-    #  - name: Setup Java
-
-    #    uses: actions/setup-java@v4
-    #    with:
-    #      distribution: "semeru" # See 'Supported distributions' for available options
-    #      java-version: ${{ matrix.java-version }}
-
-    #  - name: Run EE server
-    #    uses: ./.github/actions/run-ee-server
-    #    #with:
-    #    #  use-server-rc: ${{ inputs.use-server-rc }}
-    #    #  server-tag: ${{ inputs.server-tag }}
-
-    #  - name: Build and test
-    #    run: |
-    #      mvn install
-    #      cd test
-    #      mvn test -DskipTests=false
 
   build-stage-jdk8:
     if: github.ref == 'refs/heads/stage-jdk8'
@@ -70,4 +39,3 @@ jobs:
     with:
       java-version: ${{ matrix.java-version }}
       branch: ${{ matrix.branch }}
-      build-identifier: "${{ matrix.java-version }}-${{ matrix.branch }}"

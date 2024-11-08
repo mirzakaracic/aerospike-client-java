@@ -2,8 +2,10 @@ name: "Wait for Aerospike server to start"
 description: Only tested on Linux and macOS
 inputs:
   container-name:
+    description: Container name
     required: true
   is-security-enabled:
+    description: Flag to toggle docker hub creds use. With this flag enabled before attempting to pull image we will attempt to log in do docker hub.
     required: false
     default: "false"
 

@@ -4,20 +4,20 @@ description: "Run EE server. Returns once server is ready. Only tested on Linux 
 inputs:
   # All inputs in composite actions are strings
   use-server-rc:
-    description: flag for rc candidates
+    description: Flag for rc candidates
     required: true
     default: "false"
   server-tag:
-    description: server version to use
+    description: Server version to use
     required: true
     default: "latest"
   # Github Composite Actions can't access secrets
   # so we need to pass them in as inputs
   docker-hub-username:
-    description: dockerhub username
+    description: Dockerhub username
     required: false
   docker-hub-password:
-    description: dockerhub password
+    description: Dockerhub password
     required: false
 
 runs:

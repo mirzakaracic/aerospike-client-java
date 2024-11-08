@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-stage:
+  build:
     name: Build stage
     uses: ./.github/workflows/build-stage.yaml
     with:

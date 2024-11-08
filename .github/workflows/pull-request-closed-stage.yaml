@@ -1,11 +1,9 @@
 name: Pull `request closed` stage build workflow (WIP)
 
 on:
-  pull_request_target:
+  push:
     branches:
       - stage*
-    types:
-      - closed
   workflow_dispatch:
 
 jobs:

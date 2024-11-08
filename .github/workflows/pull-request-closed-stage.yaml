@@ -15,6 +15,7 @@ jobs:
 
   upload-to-jfrog:
     name: Upload artifacts to JFrog
+    needs: "build-stage"
     uses: ./.github/workflows/upload-to-jfrog.yaml
     with:
       version: ${{ needs.bump-dev-number.outputs.new_version }}
@@ -22,6 +23,6 @@ jobs:
 
   # Clean up after files artifacts have been uploaded to jfrog
   delete-artifacts:
-    needs: "build-stage"
+    needs: ["build-stage", "upload-to-jfrog"]
     name: Delete artifacts
     uses: ./.github/workflows/delete-artifacts.yaml

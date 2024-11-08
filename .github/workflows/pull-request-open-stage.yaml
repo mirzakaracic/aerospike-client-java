@@ -4,7 +4,7 @@ on:
   pull_request:
     branches:
       - stage
-      - jdk8
+      - stage-jdk8
     types:
       - review_requested
 

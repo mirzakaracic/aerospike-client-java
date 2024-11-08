@@ -3,8 +3,7 @@ name: Pull `request closed` stage build workflow (WIP)
 on:
   pull_request_target:
     branches:
-      - stage
-      - stage-jdk8
+      - stage*
     types:
       - closed
   workflow_dispatch:

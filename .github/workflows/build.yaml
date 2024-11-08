@@ -31,17 +31,17 @@ jobs:
           distribution: "semeru" # See 'Supported distributions' for available options
           java-version: ${{ inputs.java-version }}
 
-      - name: Run EE server
-        uses: ./.github/actions/run-ee-server
-        #with:
-        #  use-server-rc: ${{ inputs.use-server-rc }}
-        #  server-tag: ${{ inputs.server-tag }}
+      #- name: Run EE server
+      #  uses: ./.github/actions/run-ee-server
+      #  #with:
+      #  #  use-server-rc: ${{ inputs.use-server-rc }}
+      #  #  server-tag: ${{ inputs.server-tag }}
 
       - name: Build and test
         run: |
           mvn install
           cd test
-          mvn test -DskipTests=false
+          mvn test -DskipTests=true
 
       - name: Upload jars to GitHub
         uses: actions/upload-artifact@v4

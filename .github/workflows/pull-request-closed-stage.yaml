@@ -1,11 +1,12 @@
-name: Pull `request open` stage build workflow (WIP)
+name: Pull `request closed` stage build workflow (WIP)
 
 on:
-  pull_request:
+  pull_request_target:
     branches:
-      - "stage*"
+      - stage
+      - stage-jdk8
     types:
-      - review_requested
+      - closed
   workflow_dispatch:
 
 jobs:
@@ -21,6 +22,7 @@ jobs:
     with:
       java-version: ${{ matrix.java-verision }}
       branch: ${{ matrix.branch }}
+      bump-version: true
 
   build-stage-jdk8:
     if: github.ref == 'refs/heads/stage-jdk8'
@@ -34,3 +36,16 @@ jobs:
     with:
       java-version: ${{ matrix.java-version }}
       branch: ${{ matrix.branch }}
+      bump-version: true
+
+  upload-to-jfrog:
+    name: Upload artifacts to JFrog
+    uses: ./.github/workflows/upload-to-jfrog.yml
+    with:
+      version: ${{ needs.bump-dev-number.outputs.new_version }}
+    secrets: inherit
+
+  # Clean up after files artifacts have been uploaded to jfrog
+  delete-artifacts:
+    name: Delete artifacts
+    uses: ./.github/workflows/delete-artifacts.yaml

@@ -9,6 +9,10 @@ on:
       java-version:
         type: number
         required: true
+      bump-version:
+        type: boolean
+        required: false
+        default: false
 
 jobs:
   build:
@@ -16,6 +20,13 @@ jobs:
     env:
       BUILD_IDENTIFIER: "${{ inputs.branch }}-{{ inputs.java-version }}"
     steps:
+      - name: Increment version
+        if: ${{ inputs.bump-version == true }}
+        run: |
+          mvn build-helper:parse-version versions:set \
+          -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${parsedVersion.nextIncrementalVersion} \
+          versions:commit
+
       - name: Checkout client
         uses: actions/checkout@v2
         with:

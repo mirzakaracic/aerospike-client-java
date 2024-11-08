@@ -1,5 +1,3 @@
-name: Upload to JFrog
-
 on:
   workflow_call:
     inputs:
@@ -18,7 +16,6 @@ on:
 
 jobs:
   upload-to-jfrog:
-    name: Upload artifacts to JFrog
     runs-on: ubuntu-22.04
     steps:
       - name: Download artifacts

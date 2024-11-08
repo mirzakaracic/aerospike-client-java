@@ -15,7 +15,7 @@ jobs:
 
   upload-to-jfrog:
     name: Upload artifacts to JFrog
-    uses: ./.github/workflows/upload-to-jfrog.yml
+    uses: ./.github/workflows/upload-to-jfrog.yaml
     with:
       version: ${{ needs.bump-dev-number.outputs.new_version }}
     secrets: inherit

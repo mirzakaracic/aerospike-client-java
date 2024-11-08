@@ -11,32 +11,10 @@ on:
 
 jobs:
   build-stage:
-    if: github.ref == 'refs/heads/stage'
-    uses: ./.github/workflows/build.yaml
-    strategy:
-      matrix:
-        java-version: [21]
-        include:
-          - java-version: 21
-            branch: "stage"
+    name: Build stage
+    uses: ./.github/workflows/build-stage.yaml
     with:
-      java-version: ${{ matrix.java-verision }}
-      branch: ${{ matrix.branch }}
-      bump-version: true
-
-  build-stage-jdk8:
-    if: github.ref == 'refs/heads/stage-jdk8'
-    uses: ./.github/workflows/build.yaml
-    strategy:
-      matrix:
-        java-version: [8]
-        include:
-          - java-version: 8
-            branch: "stage-jdk8"
-    with:
-      java-version: ${{ matrix.java-version }}
-      branch: ${{ matrix.branch }}
-      bump-version: true
+      branch: github.ref
 
   upload-to-jfrog:
     name: Upload artifacts to JFrog
@@ -47,5 +25,6 @@ jobs:
 
   # Clean up after files artifacts have been uploaded to jfrog
   delete-artifacts:
+    needs: "build-stage"
     name: Delete artifacts
     uses: ./.github/workflows/delete-artifacts.yaml

@@ -34,3 +34,7 @@ jobs:
     with:
       java-version: ${{ matrix.java-version }}
       branch: ${{ matrix.branch }}
+
+  delete-artifacts:
+    name: Delete artifacts
+    uses: ./.github/workflows/delete-artifacts.yaml

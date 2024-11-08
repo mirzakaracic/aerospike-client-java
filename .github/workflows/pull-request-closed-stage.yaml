@@ -23,6 +23,6 @@ jobs:
 
   # Clean up after files artifacts have been uploaded to jfrog
   delete-artifacts:
-    needs: ["build-stage", "upload-to-jfrog"]
+    needs: ["build-stage"]
     name: Delete artifacts
     uses: ./.github/workflows/delete-artifacts.yaml

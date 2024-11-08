@@ -26,7 +26,7 @@ jobs:
           path: artifacts
 
       - name: list content
-        run: ls -la
+        run: ls -R
         working-directory: artifacts
 
       #- name: Set up JFrog credentials

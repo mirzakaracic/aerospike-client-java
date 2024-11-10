@@ -9,14 +9,15 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  test-with-server-release:
     name: Build stage
     uses: ./.github/workflows/build-stage.yaml
     with:
       branch: ${{ github.ref }}
 
-  # Clean up after files artifacts have been uploaded to jfrog
-  delete-artifacts:
-    needs: "build"
-    name: Delete artifacts
-    uses: ./.github/workflows/delete-artifacts.yaml
+  test-with-server-rc:
+    name: Build stage
+    uses: ./.github/workflows/build-stage.yaml
+    with:
+      branch: ${{ github.ref }}
+      use-server-rc: true

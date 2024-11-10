@@ -28,6 +28,11 @@ on:
         required: false
         default: false
         description: "Upload built artifacts to github?"
+    secrets:
+      DOCKER_HUB_BOT_USERNAME:
+        required: true
+      DOCKER_HUB_BOT_PW:
+        required: true
 
 jobs:
   build:
@@ -58,6 +63,8 @@ jobs:
         with:
           use-server-rc: ${{ inputs.use-server-rc }}
           server-tag: ${{ inputs.server-tag }}
+          docker-hub-username: ${{ secrets.DOCKER_HUB_BOT_USERNAME }}
+          docker-hub-password: ${{ secrets.DOCKER_HUB_TOKEN }}
 
       - name: Build
         run: mvn install

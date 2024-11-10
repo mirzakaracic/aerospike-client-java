@@ -13,20 +13,28 @@ on:
         type: boolean
         required: false
         default: false
+      use-server-rc:
+        type: boolean
+        required: true
+        default: false
+        description: "Test against server release candidate?"
+      server-tag:
+        type: string
+        required: true
+        default: "latest"
+        description: "Server docker image tag"
+      upload-artifacts:
+        type: boolean
+        required: true
+        default: false
+        description: "Upload built artifacts to github?"
 
 jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      BUILD_IDENTIFIER: "${{ inputs.branch }}-{{ inputs.java-version }}"
+      BUILD_IDENTIFIER: "${{ inputs.branch }}-${{ inputs.java-version }}"
     steps:
-      - name: Increment version
-        if: ${{ inputs.bump-version == true }}
-        run: |
-          mvn build-helper:parse-version versions:set \
-          -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${parsedVersion.nextIncrementalVersion} \
-          versions:commit
-
       - name: Checkout client
         uses: actions/checkout@v2
         with:
@@ -38,21 +46,29 @@ jobs:
           distribution: "semeru" # See 'Supported distributions' for available options
           java-version: ${{ inputs.java-version }}
 
-      #- name: Run EE server
-      #  uses: ./.github/actions/run-ee-server
-      #  #with:
-      #  #  use-server-rc: ${{ inputs.use-server-rc }}
-      #  #  server-tag: ${{ inputs.server-tag }}
-
-      - name: Build and test
+      - name: Increment version
+        if: ${{ inputs.bump-version == true }}
         run: |
-          mvn install
-          cd test
-          mvn test -DskipTests=true
+          mvn build-helper:parse-version versions:set \
+          -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.nextMinorVersion}.\${parsedVersion.incrementalVersion} \
+          versions:commit
+
+      - name: Run EE server
+        uses: ./.github/actions/run-ee-server
+        with:
+          use-server-rc: ${{ inputs.use-server-rc }}
+          server-tag: ${{ inputs.server-tag }}
+
+      - name: Build
+        run: mvn install
+
+      - name: Test
+        working-directory: test
+        run: mvn test
 
       - name: Upload jars to GitHub
+        if: ${{  !cancelled() && inputs.upload-artifact == true }}
         uses: actions/upload-artifact@v4
-        if: ${{ !cancelled() }}
         with:
           path: ./*/target/*.jar
           name: ${{ env.BUILD_IDENTIFIER }}.build

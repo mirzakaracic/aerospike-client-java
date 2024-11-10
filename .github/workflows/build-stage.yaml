@@ -30,7 +30,6 @@ jobs:
         include:
           - java-version: 21
             branch: "stage"
-      java-version: ${{ matrix.java-verision }}
     with:
       branch: ${{ matrix.branch }}
       bump-version: false

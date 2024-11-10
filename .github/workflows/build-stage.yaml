@@ -34,7 +34,7 @@ jobs:
       java-version: ${{ matrix.java-version }}
       branch: ${{ matrix.branch }}
       bump-version: false
-      use-server-rc: ${{ inputs.server-rc }}
+      use-server-rc: ${{ inputs.use-server-rc }}
       server-tag: ${{ inputs.server.tag }}
       upload-artifacts: ${{ inputs.upload-artifacts }}
 
@@ -51,6 +51,6 @@ jobs:
       java-version: ${{ matrix.java-version }}
       branch: ${{ matrix.branch }}
       bump-version: false
-      use-server-rc: ${{ inputs.server-rc }}
+      use-server-rc: ${{ inputs.use-server-rc }}
       server-tag: ${{ inputs.server.tag }}
       upload-artifacts: ${{ inputs.upload-artifacts }}

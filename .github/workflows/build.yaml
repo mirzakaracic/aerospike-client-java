@@ -31,7 +31,7 @@ on:
     secrets:
       DOCKER_HUB_BOT_USERNAME:
         required: true
-      DOCKER_HUB_BOT_PW:
+      DOCKER_HUB_TOKEN:
         required: true
 
 jobs:

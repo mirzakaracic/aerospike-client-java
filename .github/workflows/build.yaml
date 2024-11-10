@@ -15,17 +15,17 @@ on:
         default: false
       use-server-rc:
         type: boolean
-        required: true
+        required: false
         default: false
         description: "Test against server release candidate?"
       server-tag:
         type: string
-        required: true
+        required: false
         default: "latest"
         description: "Server docker image tag"
       upload-artifacts:
         type: boolean
-        required: true
+        required: false
         default: false
         description: "Upload built artifacts to github?"
 

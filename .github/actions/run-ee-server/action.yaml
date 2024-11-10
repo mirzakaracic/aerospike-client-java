@@ -11,6 +11,10 @@ inputs:
     description: Server version to use
     required: true
     default: "latest"
+  container-repository:
+    required: false
+    default: "aerospike.jfrog.io"
+    description: "Container repository"
   # Github Composite Actions can't access secrets
   # so we need to pass them in as inputs
   docker-hub-username:
@@ -31,7 +35,7 @@ runs:
 
     - name: Log into Docker Hub to get server RC
       if: ${{ inputs.use-server-rc == 'true' }}
-      run: docker login --username ${{ inputs.docker-hub-username }} --password ${{ inputs.docker-hub-password }}
+      run: docker login ${{ inputs.container-repository }} --username ${{ inputs.docker-hub-username }} --password ${{ inputs.docker-hub-password }}
       shell: bash
 
     - run: echo IMAGE_NAME=aerospike/aerospike-server-enterprise${{ inputs.use-server-rc == 'true' && '-rc' || '' }}:${{ inputs.server-tag }}

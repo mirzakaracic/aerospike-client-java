@@ -20,6 +20,7 @@ jobs:
     uses: ./.github/workflows/build-stage.yaml
     with:
       branch: ${{ github.ref }}
+    secrets: inherit
 
   test-with-server-rc:
     name: Build stage
@@ -27,3 +28,4 @@ jobs:
     with:
       branch: ${{ github.ref }}
       use-server-rc: true
+    secrets: inherit

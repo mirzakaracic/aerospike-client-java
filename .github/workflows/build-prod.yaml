@@ -26,11 +26,10 @@ jobs:
     uses: ./.github/workflows/build-release.yaml
     strategy:
       matrix:
-        java-version: [21]
+        client-type: ["gnu", "bouncycastle"]
         include:
           - java-version: 21
             branch: "master"
-            client-type: ["gnu", "bouncycastle"]
     with:
       java-version: ${{ matrix.java-version }}
       base-branch: ${{ matrix.branch }}
@@ -44,11 +43,10 @@ jobs:
     uses: ./.github/workflows/build-release.yaml
     strategy:
       matrix:
-        java-version: [8]
+        client-type: ["gnu", "bouncycastle"]
         include:
           - java-version: 8
             branch: "jdk8"
-            client-type: ["gnu", "bouncycastle", "proxy"]
     with:
       java-version: ${{ matrix.java-version }}
       base-branch: ${{ matrix.branch }}

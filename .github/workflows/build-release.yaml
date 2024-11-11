@@ -49,7 +49,7 @@ jobs:
       - name: Set crypto
         if: ${{ inputs.client-type == 'gnu' || inputs.client-type == 'bouncycastle' }}
         run: |
-          ./.github/workfolder/scripts/set_crypto.sh ${{ inputs.client-type }}
+          ./.github/workflows/scripts/set_crypto.sh ${{ inputs.client-type }}
 
       - name: Increment version
         run: |

@@ -1,0 +1,31 @@
+name: Pull `request open` stage build workflow (WIP)
+
+on:
+  pull_request:
+    branches:
+      - "stage*"
+    types:
+      - review_requested
+  # workflow test
+  workflow_dispatch:
+    inputs:
+      run_server_release_tests:
+        description: "DEBUG: Run server release tests in build-wheels workflow?"
+        type: boolean
+        default: false
+
+jobs:
+  test-with-server-release:
+    name: Build stage - test with latest version of aerospike enterprise server
+    uses: ./.github/workflows/build-stage.yaml
+    with:
+      branch: ${{ github.ref }}
+    secrets: inherit
+
+  test-with-server-rc:
+    name: Build stage - test with latest RC version of aerospike enterprise server
+    uses: ./.github/workflows/build-stage.yaml
+    with:
+      branch: ${{ github.ref }}
+      use-server-rc: true
+    secrets: inherit

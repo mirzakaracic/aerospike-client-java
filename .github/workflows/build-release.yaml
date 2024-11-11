@@ -1,4 +1,3 @@
-
 on:
   workflow_call:
     inputs:
@@ -98,4 +97,3 @@ jobs:
         with:
           path: ./pkg/*.jar
           name: ${{ env.BUILD_IDENTIFIER }}.build
-         name: ${{ env.BUILD_IDENTIFIER }}.build

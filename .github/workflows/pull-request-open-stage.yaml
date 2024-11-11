@@ -16,14 +16,14 @@ on:
 
 jobs:
   test-with-server-release:
-    name: Build stage
+    name: Build stage - test with latest version of aerospike enterprise server
     uses: ./.github/workflows/build-stage.yaml
     with:
       branch: ${{ github.ref }}
     secrets: inherit
 
   test-with-server-rc:
-    name: Build stage
+    name: Build stage - test with latest RC version of aerospike enterprise server
     uses: ./.github/workflows/build-stage.yaml
     with:
       branch: ${{ github.ref }}

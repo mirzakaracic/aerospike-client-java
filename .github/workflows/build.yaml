@@ -58,6 +58,20 @@ jobs:
           -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.nextMinorVersion}.\${parsedVersion.incrementalVersion} \
           versions:commit
 
+      - name: Echo new version to CI
+        if: ${{ inputs.bump-version == true }}
+        id: get-new-version
+        run: echo new_version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout) >> $GITHUB_OUTPUT
+
+      - name: Commit new version
+        if: ${{ inputs.bump-version == true }}
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "Auto-bump version to ${{ inputs.new_version }} [skip ci]"
+          commit_author: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
+          tagging_message: ${{ inputs.new_version }}
+          branch: ${{ inputs.is_workflow_call && github.ref }}
+
       - name: Run EE server
         uses: ./.github/actions/run-ee-server
         with:

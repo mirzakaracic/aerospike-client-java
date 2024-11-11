@@ -12,6 +12,7 @@ jobs:
     uses: ./.github/workflows/build-stage.yaml
     with:
       branch: ${{ github.ref }}
+      upload-artifacts: true
     secrets: inherit
 
   upload-to-jfrog:

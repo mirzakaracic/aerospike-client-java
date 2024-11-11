@@ -1,3 +1,4 @@
+
 on:
   workflow_call:
     inputs:
@@ -49,7 +50,7 @@ jobs:
       - name: Set crypto
         if: ${{ inputs.client-type == 'gnu' || inputs.client-type == 'bouncycastle' }}
         run: |
-          ./.github/workfolder/scripts/set_crypto.sh ${{ inputs.client-type }}
+          ./.github/workflows/scripts/set_crypto.sh ${{ inputs.client-type }}
 
       - name: Increment version
         run: |
@@ -97,3 +98,4 @@ jobs:
         with:
           path: ./pkg/*.jar
           name: ${{ env.BUILD_IDENTIFIER }}.build
+         name: ${{ env.BUILD_IDENTIFIER }}.build

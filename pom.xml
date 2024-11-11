@@ -43,6 +43,10 @@
     <jbcrypt.version>0.4</jbcrypt.version>
     <commons-cli.version>1.9.0</commons-cli.version>
     <junit.version>4.13.1</junit.version>
+
+    <!-- Crypto type `-bc` or empty for default(gnu) is what append to the final jar name. 
+    Since a value is required, otherwise we will get weired name for jar final packages the name is set -->
+    <crypto.type></crypto.type> 
   </properties>
 
   <dependencyManagement>

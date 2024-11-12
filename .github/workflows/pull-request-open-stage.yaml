@@ -3,10 +3,10 @@ name: Pull `request open` stage build workflow
 on:
   pull_request:
     branches:
-      - "stage"
-      - "stage-jdk8"
+      - "stage*"
     types:
-      - review_requested
+      - opened
+      - reopened
   workflow_dispatch:
 
 jobs:

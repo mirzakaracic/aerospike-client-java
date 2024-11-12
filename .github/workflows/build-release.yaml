@@ -7,18 +7,18 @@ on:
       java-version:
         type: number
         required: true
-      major:
-        type: number
-        required: true
-        description: ""
-      minor:
-        type: number
-        required: true
-        description: ""
-      patch:
-        type: number
-        required: true
-        description: ""
+      #major:
+      #  type: number
+      #  required: true
+      #  description: ""
+      #minor:
+      #  type: number
+      #  required: true
+      #  description: ""
+      #patch:
+      #  type: number
+      #  required: true
+      #  description: ""
       client-type:
         type: string
         required: true

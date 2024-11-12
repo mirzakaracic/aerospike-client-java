@@ -5,9 +5,6 @@ on:
       base-branch:
         type: string
         required: true
-      #java-version:
-      #  type: number
-      #  required: true
       major:
         type: number
         required: true
@@ -20,10 +17,6 @@ on:
         type: number
         required: true
         description: ""
-      #client-type:
-      #  type: string
-      #  required: true
-      #  description: "Crypto type. Can be be either bouncycastle or gnu."
 
 jobs:
   build:
@@ -35,12 +28,6 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: ${{ inputs.base-branch }}
-
-      #- name: Setup Java
-      #  uses: actions/setup-java@v4
-      #  with:
-      #    distribution: "semeru" # See 'Supported distributions' for available options
-      #    java-version: ${{ inputs.java-version }}
 
       - name: Increment version
         run: |

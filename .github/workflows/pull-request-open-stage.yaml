@@ -6,11 +6,10 @@ on:
       - "stage*"
     types:
       - review_requested
-  # workflow test
   workflow_dispatch:
     inputs:
       run_server_release_tests:
-        description: "DEBUG: Run server release tests in build-wheels workflow?"
+        description: "DEBUG: Run server release tests"
         type: boolean
         default: false
 

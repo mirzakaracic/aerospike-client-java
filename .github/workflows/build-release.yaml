@@ -71,9 +71,13 @@ jobs:
           jdk: ${{ inputs.java-version == 21 && 'jdk21' || 'jdk8' }}
           extension: ${{ inputs.client-type == 'bouncycastle' && '-bc' || '' }}
 
+      - name: Debug list jars
+        run: |
+          ls -R | grep jar
+
       - name: Upload jars to GitHub
         uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
-          path: ./pkg/*.jar
+          path: ./*.jar
           name: ${{ env.BUILD_IDENTIFIER }}.build

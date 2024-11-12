@@ -14,13 +14,13 @@ jobs:
     name: Build stage - test with latest version of aerospike enterprise server
     uses: ./.github/workflows/build-stage.yaml
     with:
-      branch: ${{ github.ref }}
+      branch: ${{ github.base_ref }}
     secrets: inherit
 
   test-with-server-rc:
     name: Build stage - test with latest RC version of aerospike enterprise server
     uses: ./.github/workflows/build-stage.yaml
     with:
-      branch: ${{ github.ref }}
+      branch: ${{ github.base_ref }}
       use-server-rc: true
     secrets: inherit

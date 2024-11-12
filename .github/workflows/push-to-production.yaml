@@ -1,4 +1,4 @@
-name: Push to production (WIP)
+name: Production Release
 
 on:
   workflow_dispatch:

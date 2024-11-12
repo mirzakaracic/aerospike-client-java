@@ -21,6 +21,14 @@ on:
         description: "Upload built artifacts to github?"
 
 jobs:
+  debug-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: debug
+        run: |
+          echo "${{ inputs.branch }}"
+          echo "${{  github.ref }}"
+
   build-java-21:
     if: ${{ inputs.branch == 'refs/heads/stage' }}
     uses: ./.github/workflows/build.yaml

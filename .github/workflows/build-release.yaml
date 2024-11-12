@@ -65,6 +65,10 @@ jobs:
         run: |
           echo new_version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
 
+      - name: Another print new_version
+        run: |
+          echo "${{ steps.get-new-version.new_version }}"
+
       - name: Commit new version
         uses: stefanzweifel/git-auto-commit-action@v4
         with:

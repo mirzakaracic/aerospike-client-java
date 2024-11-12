@@ -20,10 +20,10 @@ on:
         type: number
         required: true
         description: ""
-      client-type:
-        type: string
-        required: true
-        description: "Crypto type. Can be be either bouncycastle or gnu."
+      #client-type:
+      #  type: string
+      #  required: true
+      #  description: "Crypto type. Can be be either bouncycastle or gnu."
 
 jobs:
   build:

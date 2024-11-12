@@ -24,7 +24,6 @@ jobs:
   bump-version:
     uses: ./.github/workflows/bump-version.yaml
     with:
-      java-version: ${{ matrix.java-version }}
       base-branch: ${{ matrix.branch }}
       major: ${{ inputs.major }}
       minor: ${{ inputs.minor }}

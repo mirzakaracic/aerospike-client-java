@@ -45,11 +45,11 @@ jobs:
       #    mvn -version
       #    java -version
 
-      #- name: Setup Java
-      #  uses: actions/setup-java@v4
-      #  with:
-      #    distribution: "semeru" # See 'Supported distributions' for available options
-      #    java-version: ${{ inputs.java-version }}
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: "semeru" # See 'Supported distributions' for available options
+          java-version: ${{ inputs.java-version }}
 
       #- name: Set crypto
       #  if: ${{ inputs.client-type == 'gnu' || inputs.client-type == 'bouncycastle' }}

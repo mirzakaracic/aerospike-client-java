@@ -85,7 +85,7 @@ jobs:
 
       - name: Test
         working-directory: test
-        run: mvn test
+        run: mvn test -DskipTests=false
 
       - name: Upload jars to GitHub
         if: ${{ !cancelled() && inputs.upload-artifacts == true }}

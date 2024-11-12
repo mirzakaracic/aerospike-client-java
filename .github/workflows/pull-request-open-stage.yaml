@@ -1,3 +1,5 @@
+name: PR open
+
 on:
   pull_request:
     branches:

@@ -1,5 +1,3 @@
-name: Pull `request open` stage build workflow
-
 on:
   pull_request:
     branches:
@@ -11,14 +9,14 @@ on:
 
 jobs:
   test-with-server-release:
-    name: Build stage - test with latest version of aerospike enterprise server
+    name: Build stage - Test with latest version of Aerospike Enterprise Server
     uses: ./.github/workflows/build-stage.yaml
     with:
       branch: ${{ github.base_ref }}
     secrets: inherit
 
   test-with-server-rc:
-    name: Build stage - test with latest RC version of aerospike enterprise server
+    name: Build stage - Test with latest RC version of Aerospike Enterprise Server
     uses: ./.github/workflows/build-stage.yaml
     with:
       branch: ${{ github.base_ref }}

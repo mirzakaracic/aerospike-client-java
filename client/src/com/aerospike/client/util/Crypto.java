@@ -16,11 +16,12 @@
  */
 package com.aerospike.client.util;
 
+import java.util.Base64;
+
+import org.bouncycastle.crypto.digests.RIPEMD160Digest;
+
 import com.aerospike.client.Value;
 import com.aerospike.client.command.Buffer;
-
-import gnu.crypto.hash.RipeMD160;
-import gnu.crypto.util.Base64;
 
 public final class Crypto {
 	/**
@@ -35,23 +36,29 @@ public final class Crypto {
 		buffer[setLength] = (byte)key.getType();
 		int keyLength = key.write(buffer, setLength + 1);
 
-		RipeMD160 hash = new RipeMD160();
+		RIPEMD160Digest hash = new RIPEMD160Digest();
 		hash.update(buffer, 0, setLength);
 		hash.update(buffer, setLength, keyLength + 1);
-		return hash.digest();
+
+		byte[] digest = new byte[20];
+		hash.doFinal(digest, 0);
+		return digest;
 	}
 
 	/**
 	 * Decode base64 bytes into a byte array.
 	 */
 	public static byte[] decodeBase64(byte[] src, int off, int len) {
-		return Base64.decode(src, off, len);
+		Base64.Decoder decoder = Base64.getDecoder();
+		return decoder.decode(new String(src, off, len));
 	}
 
 	/**
 	 * Encode bytes into a base64 encoded string.
 	 */
 	public static String encodeBase64(byte[] src) {
-		return Base64.encode(src, 0, src.length, false);
+		Base64.Encoder encoder = Base64.getEncoder();
+		return encoder.encodeToString(src);
 	}
 }
+

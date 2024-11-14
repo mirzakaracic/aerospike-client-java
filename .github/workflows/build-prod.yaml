@@ -47,6 +47,7 @@ jobs:
 
   build-java-8:
     needs: bump-version
+    secrets: inherit
     if: ${{ inputs.branch == 'jdk8' }}
     uses: ./.github/workflows/build-release.yaml
     strategy:

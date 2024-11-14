@@ -12,10 +12,14 @@ on:
         required: true
         description: "Crypto type. Can be be either bouncycastle or gnu."
     secrets:
-      - SONATYPE_MAVEN_USERNAME
-      - SONATYPE_MAVEN_PASSWORD
-      - MAVEN_GPG_SIGNING_KEY
-      - MAVEN_GPG_PASSPHRASE
+      SONATYPE_MAVEN_USERNAME:
+        required: true
+      SONATYPE_MAVEN_PASSWORD:
+        required: true
+      MAVEN_GPG_SIGNING_KEY:
+        required: true
+      MAVEN_GPG_PASSPHRASE:
+        required: true
 
 jobs:
   build:

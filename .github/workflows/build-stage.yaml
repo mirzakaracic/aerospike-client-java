@@ -35,7 +35,7 @@ jobs:
           echo "${{ github.ref }}"
 
   build-java-21:
-    if: ${{ inputs.branch == 'refs/heads/stage' }}
+    if: ${{ inputs.branch == 'refs/heads/stage' || inputs.branch == 'stage' }}
     uses: ./.github/workflows/build.yaml
     strategy:
       matrix:
@@ -53,7 +53,7 @@ jobs:
     secrets: inherit
 
   build-java-8:
-    if: ${{ inputs.branch == 'refs/heads/stage-jdk8' }}
+    if: ${{ inputs.branch == 'refs/heads/stage-jdk8' || inputs.branch == 'stage-jdk8' }}
     uses: ./.github/workflows/build.yaml
     strategy:
       matrix:

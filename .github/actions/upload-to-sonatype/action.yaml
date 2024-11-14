@@ -48,7 +48,7 @@ runs:
 
     - name: Debug list content
       shell: bash
-      run: ls -la target
+      run: ls -R target
     #- name: Publish package
     #  working-directory: ${{ inputs.module }}
     #  shell: bash

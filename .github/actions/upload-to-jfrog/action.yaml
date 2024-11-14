@@ -1,5 +1,5 @@
 name: Publish artifacts to JFrog
-description: Only tested on Linux and macOS
+description: "Publishes artifacts to JFrog"
 
 inputs:
   version:

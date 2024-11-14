@@ -70,6 +70,7 @@
   </dependencies>
 
   <build>
+    <finalName>aerospike-client-jdk${java.version}${crypto.type}-${version}</finalName>
     <sourceDirectory>${project.basedir}/src</sourceDirectory>
     <resources>
       <resource>

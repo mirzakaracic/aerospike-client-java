@@ -11,6 +11,11 @@ on:
         type: string
         required: true
         description: "Crypto type. Can be be either bouncycastle or gnu."
+    secrets:
+      - SONATYPE_MAVEN_USERNAME
+      - SONATYPE_MAVEN_PASSWORD
+      - MAVEN_GPG_SIGNING_KEY
+      - MAVEN_GPG_PASSPHRASE
 
 jobs:
   build:
@@ -33,39 +38,32 @@ jobs:
         with:
           distribution: "semeru" # See 'Supported distributions' for available options
           java-version: ${{ inputs.java-version }}
+          server-username: ${{ secrets.SONATYPE_MAVEN_USERNAME }}
+          server-password: ${{ secrets.SONATYPE_MAVEN_PASSWORD
+          gpg-private-key: ${{ secrets.MAVEN_GPG_SIGNING_KEY }}
+          gpg-passphrase: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
 
       - name: Echo new version to CI
         id: get-new-version
         run: echo new_version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout) >> $GITHUB_OUTPUT
 
-      - name: Build
-        run: |
-          mvn clean install
-
-      - name: Build source jar
-        run: |
-          mvn source:jar
-        working-directory: client
-
-      - name: Build docs
-        run: |
-          mvn javadoc:jar
-        working-directory: client
-
-      - name: Package
-        uses: ./.github/actions/package-jar
+      - name: Release client
+        uses: ./.github/actions/upload-to-sonatype
         with:
-          version: ${{ steps.get-new-version.outputs.new_version }}
-          jdk: ${{ inputs.java-version == 21 && 'jdk21' || 'jdk8' }}
-          extension: ${{ inputs.client-type == 'bouncycastle' && '-bc' || '' }}
+          version: ${{ needs.get-new-version.outputs.new_version }}
+          maven-username: ${{ secrets.SONATYPE_MAVEN_USERNAME }}
+          maven-password: ${{ secrets.SONATYPE_MAVEN_PASSWORD }}
+          gpg-signing-key: ${{ secrets.MAVEN_GPG_SIGNING_KEY }}
+          gpg-signing-key-password: ${{secrets.MAVEN_GPG_PASSPHRASE }}
+          module: client
 
-      - name: Debug list jars
-        run: |
-          ls -R | grep jar
-
-      - name: Upload jars to GitHub
-        uses: actions/upload-artifact@v4
-        if: ${{ !cancelled() }}
+      - name: Release proxy client
+        if: ${{ inputs.java-version == 8 }}
+        uses: ./.github/actions/upload-to-sonatype
         with:
-          path: ./*.jar
-          name: ${{ env.BUILD_IDENTIFIER }}.build
+          version: ${{ needs.get-new-version.outputs.new_version }}
+          maven-username: ${{ secrets.SONATYPE_MAVEN_USERNAME }}
+          maven-password: ${{ secrets.SONATYPE_MAVEN_PASSWORD }}
+          gpg-signing-key: ${{ secrets.MAVEN_GPG_SIGNING_KEY }}
+          gpg-signing-key-password: ${{secrets.MAVEN_GPG_PASSPHRASE }}
+          module: client

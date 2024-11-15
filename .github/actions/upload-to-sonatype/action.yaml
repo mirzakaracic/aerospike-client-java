@@ -39,7 +39,7 @@ runs:
       shell: bash
       run: |
         echo "-${{ inputs.crypto-type }}-"
-        mvn clean install -Dcrypto.type="${{ inputs.crypto-type }}"
+        mvn clean install -Dcrypto.type=${{ inputs.crypto-type }}
 
     - name: Build source jar
       run: mvn source:jar
@@ -53,7 +53,8 @@ runs:
 
     - name: Debug list content
       shell: bash
-      run: ls -R | grep *.jar
+      run: |
+        ls -R | grep ".*.jar"
     #- name: Publish package
     #  working-directory: ${{ inputs.module }}
     #  shell: bash

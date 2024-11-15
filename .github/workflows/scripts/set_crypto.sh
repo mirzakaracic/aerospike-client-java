@@ -2,8 +2,6 @@
 # The default crypto library is gnu-crypto.
 # This script can change crypto library to bouncy castle's bcprov-jdk15on.
 
-cd $(dirname $0)
-
 case "$1" in
 gnu)
   set -x

@@ -31,10 +31,6 @@ runs:
       shell: bash
       run: mvn versions:set -DnewVersion=${{ inputs.version }}
 
-    - name: Deubug
-      shell: bash
-      run: echo "crypto type\"${{ inputs.crypto-type }}\""
-
     - name: Build
       shell: bash
       run: |
@@ -42,12 +38,12 @@ runs:
         mvn clean install -Dcrypto.type=${{ inputs.crypto-type }}
 
     - name: Build source jar
-      run: mvn source:jar
+      run: mvn source:jar -Dcrypto.type=${{ inputs.crypto-type }}
       shell: bash
       working-directory: ${{ inputs.module }}
 
     - name: Build docs
-      run: mvn javadoc:jar
+      run: mvn javadoc:jar -Dcrypto.type=${{ inputs.crypto-type }}
       shell: bash
       working-directory: ${{ inputs.module }}
 

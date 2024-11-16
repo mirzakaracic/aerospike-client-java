@@ -32,7 +32,7 @@ jobs:
       - name: debug
         run: |
           echo "${{ inputs.branch }}"
-          echo "${{ github.ref }}"
+          echo "${{ github.base_ref }}"
 
   build-java-21:
     if: ${{ inputs.branch == 'refs/heads/stage' || inputs.branch == 'stage' }}

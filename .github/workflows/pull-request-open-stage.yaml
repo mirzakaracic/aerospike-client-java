@@ -11,7 +11,6 @@ on:
     inputs:
       branch:
         type: string
-        default: stage
         description: Base branch to use if manually starting. By default base_ref will empty if triggering manually hence base_ref is only available on PRs.
 
 jobs:

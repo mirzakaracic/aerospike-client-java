@@ -4,6 +4,9 @@ on:
       branch:
         type: string
         required: true
+      source-branch:
+        type: string
+        required: false
       use-server-rc:
         type: boolean
         required: false
@@ -35,7 +38,7 @@ jobs:
           echo "${{ github.base_ref }}"
 
   build-java-21:
-    if: ${{ github.base_ref == 'refs/heads/stage' }}
+    if: ${{ inputs.source-branch == 'refs/heads/stage' }}
     uses: ./.github/workflows/build.yaml
     strategy:
       matrix:
@@ -53,7 +56,7 @@ jobs:
     secrets: inherit
 
   build-java-8:
-    if: ${{ github.base_ref == 'refs/heads/stage-jdk8' }}
+    if: ${{ inputs.source-branch == 'refs/heads/stage-jdk8' }}
     uses: ./.github/workflows/build.yaml
     strategy:
       matrix:

@@ -19,7 +19,7 @@ jobs:
     uses: ./.github/workflows/build-stage.yaml
     with:
       branch: ${{ github.ref }}
-      source_branch: ${{ inputs.source-branch || github.base_ref }}
+      source-branch: ${{ inputs.source-branch || github.base_ref }}
     secrets: inherit
 
   test-with-server-rc:
@@ -27,6 +27,6 @@ jobs:
     uses: ./.github/workflows/build-stage.yaml
     with:
       branch: ${{ github.base_ref || inputs.branch }}
-      source_branch: ${{ inputs.source-branch || github.base_ref }}
+      source-branch: ${{ inputs.source-branch || github.base_ref }}
       use-server-rc: true
     secrets: inherit

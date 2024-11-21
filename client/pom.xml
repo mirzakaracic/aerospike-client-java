@@ -8,7 +8,7 @@
     <artifactId>aerospike-parent</artifactId>
     <version>9.0.0</version>
   </parent>
-  <artifactId>aerospike-client-jdk21</artifactId>
+  <artifactId>aerospike-client-jdk${java.version}${crypto.type}</artifactId>
   <packaging>jar</packaging>
 
   <name>aerospike-client-jdk21</name>
@@ -69,6 +69,40 @@
     </dependency>
   </dependencies>
 
+  <profiles>
+    <profile>
+      <id>sign</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>3.2.7</version>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                  </goals>
+                </execution>
+              </executions>
+            <configuration>
+              <!-- Prevent gpg from using pinentry programs -->
+              <gpgArguments>
+                <arg>--pinentry-mode</arg>
+                <arg>loopback</arg>
+              </gpgArguments>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
   <build>
     <sourceDirectory>${project.basedir}/src</sourceDirectory>
     <resources>
@@ -78,6 +112,12 @@
     </resources>
 
     <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-gpg-plugin</artifactId>
+        <version>3.2.7</version>
+      </plugin>
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>

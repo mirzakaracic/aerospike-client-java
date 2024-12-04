@@ -8,10 +8,10 @@
     <artifactId>aerospike-parent</artifactId>
     <version>9.0.1</version>
   </parent>
-  <artifactId>aerospike-client-jdk21</artifactId>
+  <artifactId>aerospike-client${crypto.type}-jdk21</artifactId>
   <packaging>jar</packaging>
 
-  <name>aerospike-client-jdk21</name>
+  <name>aerospike-client${crypto.type}-jdk21</name>
 
   <dependencies>
     <dependency>

@@ -28,7 +28,7 @@ runs:
       shell: bash
       id: release-notes
       run: |
-        notes=$(git log "${{steps.get-previous-tag.outputs.previous-tag }}..HEAD" --pretty=format:"%s" --no-merges)
+        notes=$(git log "${{ steps.get-previous-tag.outputs.previous-tag }}..HEAD" --pretty=format:"%s" --no-merges)
 
         # GitHub Actions requires that multiline output is escaped:
         notes="${notes//'%'/'%25'}"
